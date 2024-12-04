@@ -1,0 +1,119 @@
+Basics of SQL
+Data Type:
+Data types in SQL define the nature of data that can be stored in a column, ensuring data integrity and optimizing performance. Choosing the appropriate data type is essential for accurate data storage and efficient retrieval.
+Numeric Data Types:
+INT (Integer): Stores whole numbers.
+Range: Typically -2,147,483,648 to 2,147,483,647, depending on the system.
+Example: INT can store values like 1, 100, -50.
+Usage: Ideal for IDs, counters, or quantities.
+DECIMAL(p, s) (Fixed-point): Stores exact numeric values with a fixed number of decimal places.
+Parameters:
+p (Precision): Total number of digits.
+s (Scale): Number of digits after the decimal point.
+Example: DECIMAL(10,2) stores up to 10 digits in total, with 2 after the decimal point (e.g., 12345678.90).
+Usage: Suitable for financial data, prices, or any data requiring exact decimal values.
+FLOAT (Floating-point): Stores approximate numeric values with floating decimal points.
+Example: FLOAT(6,2) allows a total of 6 digits, with 2 after the decimal (e.g., 1234.56).
+Usage: Ideal for scientific calculations or measurements where approximate values are acceptable.
+String Data Types:
+CHAR(n): Fixed-length string of n characters.
+Example: CHAR(5) always stores exactly 5 characters, padding with spaces if necessary (e.g., 'AB ').
+Usage: Suitable for fixed-length data like codes or short identifiers.
+VARCHAR(n): Variable-length string with a maximum length of n.
+Example: VARCHAR(50) can store up to 50 characters, but only consumes storage for actual data length.
+Usage: Useful for names, addresses, or descriptions.
+TEXT: Stores large amounts of text data.
+Example: Can store lengthy paragraphs or articles.
+Usage: Suitable for comments, long descriptions, or blog content.
+Date/Time Data Types:
+DATE: Stores dates in YYYY-MM-DD format.
+Example: '2024-07-10'.
+Usage: Birthdates, hire dates, or transaction dates.
+TIME: Stores time in HH:MM:SS format.
+Example: '14:30:00'.
+Usage: Recording times of events or shifts.
+DATETIME: Stores both date and time.
+Example: '2024-07-10 14:30:00'.
+Usage: Timestamps for logs or detailed records.
+Boolean Data Type:
+BOOLEAN: Stores TRUE or FALSE values.
+Example: is_active BOOLEAN.
+Usage: Flagging active records or status indicators.
+Example Table with Data Types:
+sql
+Copy code
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    hire_date DATE,
+    salary DECIMAL(10,2),
+    is_active BOOLEAN
+);
+
+
+2. Data Manipulation Language (DML)
+DML commands manage data within tables. The main commands are INSERT, UPDATE, and DELETE.
+INSERT:
+Adds new records into a table.
+sql
+Copy code
+INSERT INTO employees (employee_id, name, hire_date, salary, is_active)
+VALUES (1, 'Alice', '2023-05-10', 75000.50, TRUE);
+
+Explanation: Inserts a new employee record with specified values.
+UPDATE:
+Modifies existing records.
+sql
+Copy code
+UPDATE employees
+SET salary = 80000.00
+WHERE employee_id = 1;
+
+Important: Always use a WHERE clause to target specific rows, preventing unintended updates.
+DELETE:
+Removes records from a table.
+sql
+Copy code
+DELETE FROM employees
+WHERE employee_id = 1;
+
+Warning: Omitting the WHERE clause deletes all records!
+
+3. Data Queries (SELECT Statements)
+The SELECT statement retrieves data from tables and is the most frequently used SQL command.
+Basic SELECT:
+sql
+Copy code
+SELECT name, salary FROM employees;
+
+Retrieves: The name and salary columns for all employees.
+Filtering with WHERE:
+sql
+Copy code
+SELECT * FROM employees
+WHERE salary > 70000;
+
+Condition: Retrieves all employees with a salary greater than 70,000.
+Sorting with ORDER BY:
+sql
+Copy code
+SELECT name, salary FROM employees
+ORDER BY salary DESC;
+
+Sorting: Displays employees ordered by salary in descending order.
+Aggregating Data with GROUP BY:
+Used with aggregate functions like COUNT, SUM, and AVG.
+sql
+Copy code
+SELECT department, COUNT(*) AS employee_count
+FROM employees
+GROUP BY department;
+
+Groups data: Counts the number of employees in each department.
+
+Key Takeaways:
+Data Types: Choose appropriate types based on data needs to ensure accuracy and performance.
+DML Operations: Use WHERE clauses carefully to avoid affecting unintended records.
+SELECT Queries: Combine WHERE, ORDER BY, and GROUP BY for advanced data retrieval and analysis.
+Mastering these concepts helps you manage databases effectively and write accurate, efficient SQL queries!
+
